@@ -1,0 +1,23 @@
+javascript:void(function(theWindow){'use strict';
+ const $w=theWindow;
+ ($w.BookmarkletId||($w.BookmarkletId=(function($){
+
+	const w=$,
+	handleKey={
+		37:function(){console.log('Left \u2190');},
+		39:function(){console.log('Right \u2192');}
+	};
+
+	w.document.addEventListener('keyup',function(evt){//handleKeyUp
+		const o=evt, f=handleKey[o.keyCode];console.dir(f);
+		if(f){
+			f();
+		};
+	});
+
+	return w.Object.freeze(function(){
+		console.dir(this);
+	});
+
+ })($w)))($w);
+}(window));
