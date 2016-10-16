@@ -1,4 +1,4 @@
-javascript:void(function(theWindow){'use strict';
+void(function(theWindow){'use strict';
  const $w=theWindow;
  ($w.BookmarkletId||($w.BookmarkletId=(function($){
 
@@ -9,9 +9,11 @@ javascript:void(function(theWindow){'use strict';
 	w.document.addEventListener('keyup',lock(function(evt){//handleKeyUp
 		const o=evt;
 		switch(o.keyCode){
-			case 37:--counter;break;//Left \u2190
+			case 37:if(--counter<0){counter=0;};break;//Left \u2190
 			case 39:++counter;break;//Right \u2192
 		};
+
+
 		if(o.shiftKey!==true){
 			console.log('>',counter);
 		};
