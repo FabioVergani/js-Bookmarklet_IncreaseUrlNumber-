@@ -1,0 +1,28 @@
+javascript:void(function($){'use strict';
+ const w=$,i='BookmarkletId';
+ (w[i]||(w[i]=(function($){
+
+	const w=$,freeze=w.Object.freeze;
+
+	let counter=0;
+
+	w.document.addEventListener('keyup',freeze(function(evt){//handleKeyUp
+		const o=evt;
+		switch(o.keyCode){
+			case 37:--counter;break;//Left \u2190
+			case 39:++counter;break;//Right \u2192
+		};
+
+		if(o.shiftKey!==true){
+			console.log('>',counter);
+		};
+
+	}));
+
+	return freeze(function(){
+		//console.dir(this);
+
+	});
+
+ })(w)))(w);
+}(window));
