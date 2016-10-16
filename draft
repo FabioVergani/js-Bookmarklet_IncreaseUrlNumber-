@@ -2,21 +2,33 @@ javascript:void(function(theWindow){'use strict';
  const $w=theWindow;
  ($w.BookmarkletId||($w.BookmarkletId=(function($){
 
-	const w=$,
-	handleKey={
-		37:function(){console.log('Left \u2190');},
-		39:function(){console.log('Right \u2192');}
-	};
+	const w=$, O=w.Object, freeze=w.Object.freeze,
+	handleKey=freeze({__proto__:null,
+		37:function(k){//console.log('Left \u2190');
+			if(k){//isShifted
+				--counter;
+			}
+		},
+		39:function(k){//console.log('Right \u2192');
+			if(k){//isShifted
+				++counter;
+			}
+		},
+	});
+
+	let counter=0;
 
 	w.document.addEventListener('keyup',function(evt){//handleKeyUp
-		const o=evt, f=handleKey[o.keyCode];console.dir(f);
+		const o=evt, f=handleKey[o.keyCode];
 		if(f){
-			f();
+			f(o.shiftKey);
+			console.log(counter);
 		};
 	});
 
-	return w.Object.freeze(function(){
-		console.dir(this);
+	return freeze(function(){
+		//console.dir(this);
+		console.log('>',counter);
 	});
 
  })($w)))($w);
