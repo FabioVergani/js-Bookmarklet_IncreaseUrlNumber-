@@ -2,33 +2,25 @@ javascript:void(function(theWindow){'use strict';
  const $w=theWindow;
  ($w.BookmarkletId||($w.BookmarkletId=(function($){
 
-	const w=$, O=w.Object, freeze=w.Object.freeze,
-	handleKey=freeze({__proto__:null,
-		37:function(k){//console.log('Left \u2190');
-			if(k){//isShifted
-				--counter;
-			}
-		},
-		39:function(k){//console.log('Right \u2192');
-			if(k){//isShifted
-				++counter;
-			}
-		},
-	});
+	const w=$,lock=w.Object.freeze;
 
 	let counter=0;
 
-	w.document.addEventListener('keyup',function(evt){//handleKeyUp
-		const o=evt, f=handleKey[o.keyCode];
-		if(f){
-			f(o.shiftKey);
-			console.log(counter);
+	w.document.addEventListener('keyup',lock(function(evt){//handleKeyUp
+		const o=evt;
+		switch(o.keyCode){
+			case 37:--counter;break;//Left \u2190
+			case 39:++counter;break;//Right \u2192
 		};
-	});
+		if(o.shiftKey!==true){
+			console.log('>',counter);
+		};
 
-	return freeze(function(){
+	}));
+
+	return lock(function(){
 		//console.dir(this);
-		console.log('>',counter);
+
 	});
 
  })($w)))($w);
